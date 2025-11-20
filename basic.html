@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic</title>
+    <style>
+        body{
+            /* height: 2000px; */
+
+        }
+        .box1{
+            position: relative;
+            margin : 0 auto;
+            width: 1000px;
+            height: 500px;
+            background: linear-gradient(45deg, deeppink, aqua);
+            /* z-index: 1;
+            opacity: 0.5; */
+        }
+        .box2{
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 200px;
+            height: 200px;
+            background-color: deeppink;  
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <div class="box2"></div>
+    </div>
+    <!-- <div class="box2"></div> -->
+     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, non.</p>
+     <button onclick="hello();">Summit</button>
+     <script>
+        function hello(){
+            let p = document.querySelector('p');
+            p.textContent = "Hello JavaScript" ;
+            p.style.background = "cyan";
+            p.style.padding = "28px";
+            p.style.color = "red";
+        }
+
+        const data = [
+            {name : 'Alice', age : 22},
+            {name : 'Bob', age : 23},
+            {name : 'THS', age : 18},
+            {name : 'OBJ', age : 19},
+            {name : 'Insane', age : 20},
+        ]
+        let names = data.map(i => i.name);
+        let u20 = data.filter( i => i.age <= 20);
+        let result = data.filter (i => i.age<= 20).map( i => i.name);
+
+        // Javascript OOP //
+        let user = {
+            name : 'Alice',
+            hello: function(){
+                console.log(`Hello ${this.name} `);
+            }
+        }
+        class Animal{
+            constructor(name){
+                this.name = name;
+            }
+            hello(){
+                console.log (`Hello ${this.name}`);
+            }
+        }
+        class Dog extends Animal{
+            run(){
+                console.log(`${this.name} is running...`)
+            }
+        } 
+        let dog = new Dog('Lucy');
+     </script>
+</body>
+</html>
