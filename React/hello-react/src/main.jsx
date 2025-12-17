@@ -8,10 +8,16 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import AppProvider from "./AppProvider.jsx";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AppProvider>
-      <App />
-    </AppProvider>
+    <QueryClientProvider client={queryClient}>
+      <AppProvider>
+        <App />
+      </AppProvider>
+    </QueryClientProvider>
   </StrictMode>
 );
