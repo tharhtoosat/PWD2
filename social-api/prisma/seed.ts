@@ -22,7 +22,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.post.create({
       data: {
-        content: faker.lorem.sentence(),
+        content: faker.lorem.paragraph(),
         userId: faker.number.int({ min: 1, max: 2 }),
       },
     });
@@ -31,7 +31,7 @@ async function main() {
     await prisma.comment.create({
       data: {
         content: faker.lorem.sentence(),
-        postId: faker.number.int({ min: 1, max: 2 }),
+        postId: faker.number.int({ min: 1, max: 20 }),
         userId: faker.number.int({ min: 1, max: 2 }),
       },
     });

@@ -1,6 +1,7 @@
 import { Router } from "express";
 const router = Router();
 import { prisma } from "../libs/prisma";
+import { auth } from "../middlewares/auth";
 
 router.get("/", async (req, res) => {
   const posts = await prisma.post.findMany({
@@ -17,6 +18,20 @@ router.get("/", async (req, res) => {
   res.json(posts);
 });
 
+router.post("/", auth, async (req, res) => {
+  const user = res.locals.user;
+  const content = req.body?.content;
+  if (!content) {
+    return res.status(400).json({ msg: "content is required" });
+  }
+  const post = await prisma.post.create({
+    data: {
+      content,
+      userId: user.id,
+    },
+  });
+  res.json(post);
+});
 router.get("/:id", async (req, res) => {
   const id = Number(req.params.id);
   const post = await prisma.post.findUnique({
@@ -24,7 +39,9 @@ router.get("/:id", async (req, res) => {
     include: {
       user: true,
       likes: true,
-      comments: true,
+      comments: {
+        include: { user: true },
+      },
     },
   });
   if (!post) {
