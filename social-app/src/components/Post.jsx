@@ -15,7 +15,7 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 
-export default function Post() {
+export default function Post({ post }) {
   const navigate = useNavigate();
   return (
     <Card sx={{ mb: 2 }}>
@@ -23,13 +23,13 @@ export default function Post() {
         <Box sx={{ display: "flex", gap: 2 }}>
           <Avatar sx={{ width: 64, height: 64, background: green[500] }} />
           <Box>
-            <Typography>Alice</Typography>
-            <Typography color="success">a few seconds ago</Typography>
-            <Typography onClick={() => navigate("/show")} sx={{ mt: 1 }}>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere
-              ipsam consequuntur itaque nihil sed, ipsum libero tenetur animi
-              fuga nisi assumenda repellendus quos maxime atque illum
-              reprehenderit exercitationem iure quis.
+            <Typography>{post.user.name}</Typography>
+            <Typography color="success">{post.createdAt}</Typography>
+            <Typography
+              onClick={() => navigate(`/show/${post.id}`)}
+              sx={{ mt: 1, cursor: "pointer" }}
+            >
+              {post.content}
             </Typography>
           </Box>
         </Box>
@@ -39,7 +39,7 @@ export default function Post() {
               <LikeIcon color="error" />
             </IconButton>
             <Button size="sm" variant="text">
-              10
+              0
             </Button>
           </ButtonGroup>
           <ButtonGroup>
@@ -47,7 +47,7 @@ export default function Post() {
               <CommenIcon />
             </IconButton>
             <Button size="sm" variant="text">
-              5
+              {post.comments ? post.comments.length : 0}
             </Button>
           </ButtonGroup>
         </Box>
