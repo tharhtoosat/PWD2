@@ -2,8 +2,16 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "../libs/prisma";
 import jwt from "jsonwebtoken";
-
+import { auth } from "../middlewares/auth";
 const router = Router();
+
+router.get("/verify", auth, async (req, res) => {
+  const { id } = res.locals.user;
+  const user = await prisma.user.findUnique({
+    where: { id },
+  });
+  res.json(user);
+});
 router.post("/", async (req, res) => {
   const name = req.body?.name;
   const username = req.body?.username;
