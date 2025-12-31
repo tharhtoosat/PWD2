@@ -30,7 +30,7 @@ export default function Register() {
   };
   return (
     <Box>
-      {setRegisterError && (
+      {registerError && (
         <Alert severity="warning" sx={{ mt: 2 }}>
           Something went wrong.
         </Alert>
