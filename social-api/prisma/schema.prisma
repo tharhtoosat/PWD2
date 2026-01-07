@@ -50,4 +50,5 @@ model Like {
   post      Post @relation(fields: [postId], references: [id])
   postId    Int
   createdAt DateTime @default(now())
+  @@unique([userId,postId])
 }
